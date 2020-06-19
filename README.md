@@ -18,9 +18,9 @@ This mod adds a lot (76) mutators to the game.
     2.  Drag all files from the archive into directory /Steam/SteamApps/common/Streets of Rogue/;
     3.  Run the game, so BepInEx can create needed files and directories, and close the game;
 2.  Install RogueLibs:
-    1.  [Download the latest version of RogueLibs](https://github.com/Abbysssal/RogueLibs/releases)
+    1.  [Download the latest version of RogueLibs](https://github.com/Abbysssal/RogueLibs/releases);
     2.  Drag the file "RogueLibs.dll" into directory /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins;
-3.  [Download the latest version of a Ton of Mutators](https://github.com/Abbysssal/aToM/releases)
+3.  [Download the latest version of a Ton of Mutators](https://github.com/Abbysssal/aToM/releases);
 4.  Drag the file "aTonOfMutators.dll" into directory /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins;
 5.  Done! Now run the game and enjoy!
 
