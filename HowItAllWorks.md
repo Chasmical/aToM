@@ -132,7 +132,7 @@ patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
 ```cs
 public static void InvItem_SetupDetails(InvItem __instance)
 {
-    if (__instance.itemType == "WeaponProjectile")
+    if (__instance.itemType == "WeaponProjectile" && __instance.invItemName != "Taser")
     {
         __instance.initCount = (int)Math.Ceiling((float)__instance.initCount * RangedAmmoMultiplier);
         __instance.initCountAI = (int)Math.Ceiling((float)__instance.initCountAI * RangedAmmoMultiplier);
