@@ -2,7 +2,7 @@
 
 1. **Main page**
 2. [Mutators](https://github.com/Abbysssal/aToM/blob/master/Mutators.md)
-3. [How does it work?](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md)
+3. [How does it all work?](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
 
 ## Links ##
 *  [Download RogueLibs](https://github.com/Abbysssal/aToM/releases)
@@ -19,4 +19,4 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2106187116
 [see here](https://github.com/Abbysssal/aToM/blob/master/Mutators.md)
 
 ## How do these mutators work? ##
-[see here](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md)
+[see here](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
