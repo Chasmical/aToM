@@ -19,8 +19,7 @@
 * [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate-);
 * [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons-);
 * [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed-);
-* [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#rocket-projectiles-);
-* [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#random-projectiles-);
+* [Rocket/Random/Random Effect Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-types-);
 * [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-);
 * [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power-);
 
@@ -157,15 +156,14 @@ Category: Projectile Mutators.
 
 Conflict with: none.
 
-### Rocket Projectiles [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#rocket-projectiles) ###
+### Projectile Types [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#projectile-types) ###
 Category: Projectile Mutators.
 
-Conflict with: "Random Projectiles".
+* Rocket: All projectiles are rockets;
+* Random: All projectiles are random;
+* Random Effect: All projectiles are water pistol bullets with random effects;
 
-### Random Projectiles [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#random-projectiles) ###
-Category: Projectile Mutators.
-
-Conflict with: "Rocket Projectiles".
+Conflict with: none.
 
 ### Explosion Damage [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-damage) ###
 Category: Explosion Mutators.

@@ -7,12 +7,11 @@
 
 ## Changelog ##
 
-#### a Ton of Mutators v1.1 (75 mutators) ####
+#### a Ton of Mutators v1.1 (76 mutators) ####
 * Added [Melee Durability 1](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability-);
 * Added [Ranged Ammo 1](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo-);
 * Added Projectile Mutators category and moved [Projectile Speed Mutators](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed-) to it;
-* Added [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#rocket-projectiles-);
-* Added [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#random-projectiles-);
+* Added [Rocket, Random and Random Effect Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-types-);
 * [Ranged Ammo Mutators](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo-) now do not affect Taser;
 
 #### a Ton of Mutators v1.0 (71 mutator) ####

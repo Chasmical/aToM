@@ -19,8 +19,7 @@
 * [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#ranged-firerate);
 * [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#fully-automatic-ranged-weapons);
 * [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#projectile-speed);
-* [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#rocket-projectiles);
-* [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#random-projectiles);
+* [Rocket/Random/Random Effect Projectiles](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#projectile-types);
 * [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-damage);
 * [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-power);
 
@@ -49,7 +48,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
         __instance.initCount = (int)Math.Ceiling((float)__instance.initCount * MeleeDurabilityMultiplier);
         __instance.initCountAI = (int)Math.Ceiling((float)__instance.initCountAI * MeleeDurabilityMultiplier);
         __instance.rewardCount = (int)Math.Ceiling((float)__instance.rewardCount * MeleeDurabilityMultiplier);
-	}
+    }
 }
 ```
 ### [Melee Lunge](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge-) ###
@@ -179,28 +178,71 @@ public static void Bullet_SetupBullet(Bullet __instance)
     __instance.speed = (int)Math.Ceiling((float)__instance.speed * ProjectileSpeedMultiplier);
 }
 ```
-### [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#rocket-projectiles-) ###
+### [Projectile Types](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-types-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Prefix(typeof(SpawnerMain), "SpawnBullet", new Type[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) });
+patcher.Prefix(typeof(Gun), "spawnBullet", new Type[] { typeof(bulletStatus), typeof(InvItem), typeof(int), typeof(bool), typeof(string) });
 ```
 ```cs
 public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
 {
-    if (ProjectileRocketEnabled)
+    if (ProjectileTypeRocketEnabled)
         bulletType = bulletStatus.Rocket;
+    else if (ProjectileTypeRandomEnabled)
+        do
+            bulletType = (bulletStatus)(new System.Random().Next(1, 22)); // [1;21]
+        while (bulletType == bulletStatus.ZombieSpit || bulletType == bulletStatus.Laser || bulletType == bulletStatus.MindControl);
 }
-```
-### [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#random-projectiles-) ###
-```cs
-RoguePatcher patcher = new RoguePatcher(this, GetType());
-patcher.Prefix(typeof(SpawnerMain), "SpawnBullet", new Type[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) });
-```
-```cs
-public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
+public static void Gun_spawnBullet(ref bulletStatus bulletType, ref string myStatusEffect)
 {
-    if (ProjectileRandomEnabled)
-        bulletType = (bulletStatus)(new System.Random().Next(1, 22)); // [1;21]
+    if (ProjectileTypeRandomEffectEnabled || (bulletType == bulletStatus.WaterPistol && (myStatusEffect == null || myStatusEffect == string.Empty)))
+    {
+        bulletType = bulletStatus.WaterPistol;
+        List<string> list = new List<string>()
+        {
+            "Poisoned",
+            "Drunk",
+            "Slow",
+            "Fast",
+            "Strength",
+            "Weak",
+            "Paralyzed",
+            "Accurate",
+            "RegenerateHealth",
+            "Acid",
+            "Invincible",
+            "Invisible",
+            "Confused",
+            "Giant",
+            "Resurrection",
+            "AlwaysCrit",
+            "Shrunk",
+            "ElectroTouch",
+            "BadVision",
+            "Cyanide",
+            "DecreaseAllStats",
+            "Dizzy",
+            "DizzyB",
+            "Enraged",
+            "FeelingLucky",
+            "FeelingUnlucky",
+            "Frozen",
+            "HearingBlocked",
+            "Nicotine",
+            "Tranquilized",
+            "Electrocuted",
+            "BlockDebuffs",
+            "IncreaseAllStats",
+            "Invisible",
+            "KillerThrower",
+            "MindControlled",
+            "NiceSmelling",
+            "WerewolfEffect"
+        };
+        int rand = new System.Random().Next(list.Count);
+        myStatusEffect = list[rand];
+    }
 }
 ```
 ### [Explosion Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-) ###
