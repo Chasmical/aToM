@@ -3,25 +3,28 @@
 1. [Main page](https://github.com/Abbysssal/aToM/blob/master/README.md)
 2. [Mutators](https://github.com/Abbysssal/aToM/blob/master/Mutators.md)
 3. **How does it all work?**
+4. [Changelog](https://github.com/Abbysssal/aToM/blob/master/Changelog.md)
 
 ## Mutators list ##
 
-* [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#melee-damage);
-* [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#melee-durability);
-* [Melee Lunge x0/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#melee-lunge);
-* [Melee Speed x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#melee-speed);
-* [Thrown Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#thrown-damage);
-* [Thrown Count x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#thrown-count);
-* [Thrown Distance x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#thrown-distance);
-* [Ranged Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#ranged-damage);
-* [Ranged Ammo 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#ranged-ammo);
-* [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#ranged-firerate);
-* [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#fully-automatic-ranged-weapons);
-* [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#projectile-speed);
-* [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#explosion-damage);
-* [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItWorks.md#explosion-power);
+* [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#melee-damage);
+* [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#melee-durability);
+* [Melee Lunge x0/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#melee-lunge);
+* [Melee Speed x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#melee-speed);
+* [Thrown Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#thrown-damage);
+* [Thrown Count x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#thrown-count);
+* [Thrown Distance x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#thrown-distance);
+* [Ranged Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#ranged-damage);
+* [Ranged Ammo 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#ranged-ammo);
+* [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#ranged-firerate);
+* [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#fully-automatic-ranged-weapons);
+* [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#projectile-speed);
+* [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#rocket-projectiles);
+* [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#random-projectiles);
+* [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-damage);
+* [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-power);
 
-### [Melee Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage) ###
+### [Melee Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -33,7 +36,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
         __instance.meleeDamage = (int)Math.Ceiling((float)__instance.meleeDamage * MeleeDamageMultiplier);
 }
 ```
-### [Melee Durability](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability) ###
+### [Melee Durability](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -49,7 +52,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
 	}
 }
 ```
-### [Melee Lunge](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge) ###
+### [Melee Lunge](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Prefix(typeof(Movement), "KnockForward", new Type[] { typeof(Quaternion), typeof(float), typeof(bool) });
@@ -60,7 +63,7 @@ public static void Movement_KnockForward(ref float strength)
     strength *= MeleeLungeMultiplier;
 }
 ```
-### [Melee Speed](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-speed) ###
+### [Melee Speed](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-speed-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Melee), "Attack", new Type[] { typeof(bool) });
@@ -72,7 +75,7 @@ public static void Melee_Attack(Melee __instance)
     __instance.meleeContainerAnim.speed *= MeleeSpeedMultiplier;
 }
 ```
-### [Thrown Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-damage) ###
+### [Thrown Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-damage-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -84,7 +87,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
         __instance.throwDamage = (int)Math.Ceiling((float)__instance.throwDamage * ThrownDamageMultiplier);
 }
 ```
-### [Thrown Count](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-count) ###
+### [Thrown Count](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-count-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -101,7 +104,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
     }
 }
 ```
-### [Thrown Distance](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-distance) ###
+### [Thrown Distance](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-distance-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -113,7 +116,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
         __instance.throwDistance = (int)Math.Ceiling((float)__instance.throwDistance * ThrownDistanceMultiplier);
 }
 ```
-### [Ranged Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-damage) ###
+### [Ranged Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-damage-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Bullet), "SetupBullet", new Type[] { });
@@ -124,7 +127,7 @@ public static void Bullet_SetupBullet(Bullet __instance)
     __instance.damage = (int)Math.Ceiling((float)__instance.damage * RangedDamageMultiplier);
 }
 ```
-### [Ranged Ammo](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo) ###
+### [Ranged Ammo](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -141,7 +144,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
     }
 }
 ```
-### [Ranged Firerate](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate) ###
+### [Ranged Firerate](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Gun), "SetWeaponCooldown", new Type[] { typeof(float), typeof(InvItem) });
@@ -153,7 +156,7 @@ public static void Gun_SetWeaponCooldown(Gun __instance)
     __instance.agent.weaponCooldown = Mathf.Max(__instance.agent.weaponCooldown, 0.05f);
 }
 ```
-### [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons) ###
+### [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(InvItem), "SetupDetails", new Type[] { typeof(bool) });
@@ -165,7 +168,7 @@ public static void InvItem_SetupDetails(InvItem __instance)
         __instance.rapidFire = true;
 }
 ```
-### [Projectile Speed](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed) ###
+### [Projectile Speed](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Bullet), "SetupBullet", new Type[] { });
@@ -176,7 +179,31 @@ public static void Bullet_SetupBullet(Bullet __instance)
     __instance.speed = (int)Math.Ceiling((float)__instance.speed * ProjectileSpeedMultiplier);
 }
 ```
-### [Explosion Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage) ###
+### [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#rocket-projectiles-) ###
+```cs
+RoguePatcher patcher = new RoguePatcher(this, GetType());
+patcher.Prefix(typeof(SpawnerMain), "SpawnBullet", new Type[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) });
+```
+```cs
+public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
+{
+    if (ProjectileRocketEnabled)
+        bulletType = bulletStatus.Rocket;
+}
+```
+### [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#random-projectiles-) ###
+```cs
+RoguePatcher patcher = new RoguePatcher(this, GetType());
+patcher.Prefix(typeof(SpawnerMain), "SpawnBullet", new Type[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) });
+```
+```cs
+public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
+{
+    if (ProjectileRandomEnabled)
+        bulletType = (bulletStatus)(new System.Random().Next(1, 22)); // [1;21]
+}
+```
+### [Explosion Damage](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Explosion), "SetupExplosion", new Type[] { });
@@ -187,7 +214,7 @@ public static void Explosion_SetupExplosion(Explosion __instance)
     __instance.damage = (int)Math.Ceiling((float)__instance.damage * ExplosionDamageMultiplier);
 }
 ```
-### [Explosion Power](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power) ###
+### [Explosion Power](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power-) ###
 ```cs
 RoguePatcher patcher = new RoguePatcher(this, GetType());
 patcher.Postfix(typeof(Explosion), "SetupExplosion", new Type[] { });

@@ -3,23 +3,26 @@
 1. [Main page](https://github.com/Abbysssal/aToM/blob/master/README.md)
 2. **Mutators**
 3. [How does it all work?](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
+4. [Changelog](https://github.com/Abbysssal/aToM/blob/master/Changelog.md)
 
 ## Mutators list ##
 
-* [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage);
-* [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability);
-* [Melee Lunge x0/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge);
-* [Melee Speed x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-speed);
-* [Thrown Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-damage);
-* [Thrown Count x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-count);
-* [Thrown Distance x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-distance);
-* [Ranged Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-damage);
-* [Ranged Ammo 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo);
-* [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate);
-* [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons);
-* [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed);
-* [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage);
-* [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power);
+* [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage-);
+* [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability-);
+* [Melee Lunge x0/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge-);
+* [Melee Speed x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-speed-);
+* [Thrown Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-damage-);
+* [Thrown Count x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-count-);
+* [Thrown Distance x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-distance-);
+* [Ranged Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-damage-);
+* [Ranged Ammo 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo-);
+* [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate-);
+* [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons-);
+* [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed-);
+* [Rocket Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#rocket-projectiles-);
+* [Random Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#random-projectiles-);
+* [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-);
+* [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power-);
 
 ### Melee Damage [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#melee-damage) ###
 Category: Melee Mutators.
@@ -153,6 +156,16 @@ Category: Projectile Mutators.
 * x4: All projectiles travel at 4x greater speed;
 
 Conflict with: none.
+
+### Rocket Projectiles [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#rocket-projectiles) ###
+Category: Projectile Mutators.
+
+Conflict with: "Random Projectiles".
+
+### Random Projectiles [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#random-projectiles) ###
+Category: Projectile Mutators.
+
+Conflict with: "Rocket Projectiles".
 
 ### Explosion Damage [(?)](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md#explosion-damage) ###
 Category: Explosion Mutators.
