@@ -6,7 +6,22 @@
 4. [Changelog](https://github.com/Abbysssal/aToM/blob/master/Changelog.md)
 
 # a Ton of Mutators (aToM) v1.1 #
-This mod adds a lot (76) mutators to the game.
+This mod adds a lot (76) mutators to the game. They are separated into 5 dropdown categories "Melee", "Thrown", "Ranged", "Projectile" and "Explosion" so they don't take a lot of space in the menu:
+* [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage-);
+* [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability-);
+* [Melee Lunge x0/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-lunge-);
+* [Melee Speed x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-speed-);
+* [Thrown Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-damage-);
+* [Thrown Count x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-count-);
+* [Thrown Distance x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#thrown-distance-);
+* [Ranged Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-damage-);
+* [Ranged Ammo 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-ammo-);
+* [Ranged Firerate x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#ranged-firerate-);
+* [Fully Automatic Ranged Weapons](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#fully-automatic-ranged-weapons-);
+* [Projectile Speed x0/x0.25/x0.5/x2/x4](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-speed-);
+* [Rocket/Random/Random Effect Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-types-);
+* [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-);
+* [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power-);
 
 ## Links ##
 *  [Download a Ton of Mutators](https://github.com/Abbysssal/aToM/releases)
