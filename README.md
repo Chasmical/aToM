@@ -22,6 +22,10 @@ This mod adds a lot (76) mutators to the game. They are separated into 5 dropdow
 * [Rocket/Random/Random Effect Projectiles](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#projectile-types-);
 * [Explosion Damage x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-damage-);
 * [Explosion Power x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#explosion-power-);
+<br/><br/>
+
+Planned and Work-In-Progress Mutators:
+* Explode with bullets on death (like blue shotgunkins in Enter the Gungeon);
 
 ## Links ##
 *  [Download a Ton of Mutators](https://github.com/Abbysssal/aToM/releases)
