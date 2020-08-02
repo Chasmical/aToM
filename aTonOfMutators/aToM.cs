@@ -28,7 +28,7 @@ namespace aTonOfMutators
 
 		public const string pluginGuid = "abbysssal.streetsofrogue.atom";
 		public const string pluginName = "a Ton of Mutators";
-		public const string pluginVersion = "1.1";
+		public const string pluginVersion = "1.2";
 
 		public static MutatorCollection MyMutators { get; set; }
 
