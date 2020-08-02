@@ -7,9 +7,25 @@ using UnityEngine;
 namespace aTonOfMutators
 {
 	[BepInPlugin(pluginGuid, pluginName, pluginVersion)]
-	[BepInDependency(RogueLibs.pluginGuid, "1.2")]
+	[BepInDependency(RogueLibs.pluginGuid, "2.0")]
 	public class ATOM : BaseUnityPlugin
 	{
+		public class MyRogueUtilities
+		{
+			public static void CrossConflict(params CustomMutator[] mutators)
+			{
+				for (int i = 0; i < mutators.Length; i++)
+					for (int j = 0; j < mutators.Length; j++)
+						if (i != j)
+							mutators[i].Conflicting.Add(mutators[j].Id);
+			}
+			public static void EachConflict(string[] conflicts, params CustomMutator[] mutators)
+			{
+				for (int i = 0; i < mutators.Length; i++)
+					mutators[i].Conflicting.AddRange(conflicts);
+			}
+		}
+
 		public const string pluginGuid = "abbysssal.streetsofrogue.atom";
 		public const string pluginName = "a Ton of Mutators";
 		public const string pluginVersion = "1.1";
@@ -31,7 +47,7 @@ namespace aTonOfMutators
 		public static CustomMutator ExplosionShow { get; set; }
 		public static CustomMutator ExplosionHide { get; set; }
 
-		public int UniqueInt = 6245;
+		public int UniqueInt = -6245;
 
 		public static int Divide(int dividend, int divisor) => (int)Math.Ceiling((float)dividend / divisor);
 
@@ -40,94 +56,94 @@ namespace aTonOfMutators
 			MyMutators = new MutatorCollection();
 
 			#region Melee Damage/Durability/Lunge/Speed
-			MeleeShow = RogueLibs.SetMutator("aToM:MeleeShow", true,
+			MeleeShow = RogueLibs.CreateCustomMutator("aToM:MeleeShow", true,
 				new CustomNameInfo("[aToM] MELEE MUTATORS (show)", null, null, null, null, "[aToM] МУТАТОРЫ БЛИЖНЕГО БОЯ (показать)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			MeleeHide = RogueLibs.SetMutator("aToM:MeleeHide", true,
+			MeleeHide = RogueLibs.CreateCustomMutator("aToM:MeleeHide", true,
 				new CustomNameInfo("[aToM] MELEE MUTATORS (hide)", null, null, null, null, "[aToM] МУТАТОРЫ БЛИЖНЕГО БОЯ (скрыть)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			MeleeShow.OnEnabled += () => ToggleMelee(true);
-			MeleeHide.OnEnabled += () => ToggleMelee(false);
+			MeleeShow.OnToggledInMutatorMenu += (m, b, state) => ToggleMelee(true);
+			MeleeHide.OnToggledInMutatorMenu += (m, b, state) => ToggleMelee(false);
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage0", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage0", true,
 				new CustomNameInfo("[aToM] Melee Damage x0", null, null, null, null, "[aToM] Урон оружия ближнего боя x0", null, null),
 				new CustomNameInfo("All melee weapons deal zero damage", null, null, null, null, "Всё оружие ближнего боя наносит ноль урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage025", true,
 				new CustomNameInfo("[aToM] Melee Damage x0.25", null, null, null, null, "[aToM] Урон оружия ближнего боя x0.25", null, null),
 				new CustomNameInfo("All melee weapons deal 4x less damage", null, null, null, null, "Всё оружие ближнего боя наносит в 4x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage05", true,
 				new CustomNameInfo("[aToM] Melee Damage x0.5", null, null, null, null, "[aToM] Урон оружия ближнего боя x0.5", null, null),
 				new CustomNameInfo("All melee weapons deal 2x less damage", null, null, null, null, "Всё оружие ближнего боя наносит в 2x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage2", true,
 				new CustomNameInfo("[aToM] Melee Damage x2", null, null, null, null, "[aToM] Урон оружия ближнего боя x2", null, null),
 				new CustomNameInfo("All melee weapons deal 2x more damage", null, null, null, null, "Всё оружие ближнего боя наносит в 2x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage4", true,
 				new CustomNameInfo("[aToM] Melee Damage x4", null, null, null, null, "[aToM] Урон оружия ближнего боя x4", null, null),
 				new CustomNameInfo("All melee weapons deal 4x more damage", null, null, null, null, "Всё оружие ближнего боя наносит в 4x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage8", true,
 				new CustomNameInfo("[aToM] Melee Damage x8", null, null, null, null, "[aToM] Урон оружия ближнего боя x8", null, null),
 				new CustomNameInfo("All melee weapons deal 8x more damage", null, null, null, null, "Всё оружие ближнего боя наносит в 8x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDamage999", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDamage999", true,
 				new CustomNameInfo("[aToM] Melee Damage x999", null, null, null, null, "[aToM] Урон оружия ближнего боя x999", null, null),
 				new CustomNameInfo("All melee weapons deal 999x more damage", null, null, null, null, "Всё оружие ближнего боя наносит в 999x больше урона", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:MeleeDamage"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:MeleeDamage"), "NoMelee");
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability1", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability1", true,
 				new CustomNameInfo("[aToM] Melee Durability 1", null, null, null, null, "[aToM] Прочность оружия ближнего боя 1", null, null),
 				new CustomNameInfo("All melee weapons appear with 1 durability", null, null, null, null, "Всё оружие ближнего боя появляется с 1 запасом прочности", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability025", true,
 				new CustomNameInfo("[aToM] Melee Durability x0.25", null, null, null, null, "[aToM] Прочность оружия ближнего боя x0.25", null, null),
 				new CustomNameInfo("All melee weapons appear with 4x less durability", null, null, null, null, "Всё оружие ближнего боя появляется с в 4x меньшим запасом прочности", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability05", true,
 				new CustomNameInfo("[aToM] Melee Durability x0.5", null, null, null, null, "[aToM] Прочность оружия ближнего боя x0.5", null, null),
 				new CustomNameInfo("All melee weapons appear with 2x less durability", null, null, null, null, "Всё оружие ближнего боя появляется с в 2x меньшим запасом прочности", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability2", true,
 				new CustomNameInfo("[aToM] Melee Durability x2", null, null, null, null, "[aToM] Прочность оружия ближнего боя x2", null, null),
 				new CustomNameInfo("All melee weapons appear with 2x more durability", null, null, null, null, "Всё оружие ближнего боя появляется с в 2x большим запасом прочности", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability4", true,
 				new CustomNameInfo("[aToM] Melee Durability x4", null, null, null, null, "[aToM] Прочность оружия ближнего боя x4", null, null),
 				new CustomNameInfo("All melee weapons appear with 4x more durability", null, null, null, null, "Всё оружие ближнего боя появляется с в 4x большим запасом прочности", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeDurability8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeDurability8", true,
 				new CustomNameInfo("[aToM] Melee Durability x8", null, null, null, null, "[aToM] Прочность оружия ближнего боя x8", null, null),
 				new CustomNameInfo("All melee weapons appear with 8x more durability", null, null, null, null, "Всё оружие ближнего боя появляется с в 8x большим запасом прочности", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:MeleeDurability"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:MeleeDurability"), "NoMelee", "InfiniteMeleeDurability");
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge0", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge0", true,
 				new CustomNameInfo("[aToM] Melee Lunge x0", null, null, null, null, "[aToM] Выпад оружия ближнего боя x0", null, null),
 				new CustomNameInfo("All melee weapons don't lunge", null, null, null, null, "У оружия ближнего боя нет выпадов", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge025", true,
 				new CustomNameInfo("[aToM] Melee Lunge x0.25", null, null, null, null, "[aToM] Выпад оружия ближнего боя x0.25", null, null),
 				new CustomNameInfo("All melee weapons have 4x shorter lunge", null, null, null, null, "Выпады у оружия ближнего боя в 4x слабее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge05", true,
 				new CustomNameInfo("[aToM] Melee Lunge x0.5", null, null, null, null, "[aToM] Выпад оружия ближнего боя x0.5", null, null),
 				new CustomNameInfo("All melee weapons have 2x shorter lunge", null, null, null, null, "Выпады у оружия ближнего боя в 2x слабее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge2", true,
 				new CustomNameInfo("[aToM] Melee Lunge x2", null, null, null, null, "[aToM] Выпад оружия ближнего боя x2", null, null),
 				new CustomNameInfo("All melee weapons have 2x longer lunge", null, null, null, null, "Выпады у оружия ближнего боя в 2x дальше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge4", true,
 				new CustomNameInfo("[aToM] Melee Lunge x4", null, null, null, null, "[aToM] Выпад оружия ближнего боя x4", null, null),
 				new CustomNameInfo("All melee weapons have 4x longer lunge", null, null, null, null, "Выпады у оружия ближнего боя в 4x дальше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeLunge8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeLunge8", true,
 				new CustomNameInfo("[aToM] Melee Lunge x8", null, null, null, null, "[aToM] Выпад оружия ближнего боя x8", null, null),
 				new CustomNameInfo("All melee weapons have 8x longer lunge", null, null, null, null, "Выпады у оружия ближнего боя в 8x дальше", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:MeleeLunge"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:MeleeLunge"), "NoMelee");
 			
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeSpeed025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeSpeed025", true,
 				new CustomNameInfo("[aToM] Melee Speed x0.25", null, null, null, null, "[aToM] Скорость оружия ближнего боя x0.25", null, null),
 				new CustomNameInfo("All melee weapons attack 4x slower", null, null, null, null, "Всё оружие ближнего боя атакует в 4x медленнее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeSpeed05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeSpeed05", true,
 				new CustomNameInfo("[aToM] Melee Speed x0.5", null, null, null, null, "[aToM] Скорость оружия ближнего боя x0.5", null, null),
 				new CustomNameInfo("All melee weapons attack 2x slower", null, null, null, null, "Всё оружие ближнего боя атакует в 2x медленнее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeSpeed2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeSpeed2", true,
 				new CustomNameInfo("[aToM] Melee Speed x2", null, null, null, null, "[aToM] Скорость оружия ближнего боя x2", null, null),
 				new CustomNameInfo("All melee weapons attack 2x faster", null, null, null, null, "Всё оружие ближнего боя атакует в 2x быстрее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:MeleeSpeed4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:MeleeSpeed4", true,
 				new CustomNameInfo("[aToM] Melee Speed x4", null, null, null, null, "[aToM] Скорость оружия ближнего боя x4", null, null),
 				new CustomNameInfo("All melee weapons attack 4x faster", null, null, null, null, "Всё оружие ближнего боя атакует в 4x быстрее", null, null)));
 
@@ -137,72 +153,72 @@ namespace aTonOfMutators
 			int order = UniqueInt + 1;
 			MeleeShow.SortingOrder = MeleeHide.SortingOrder = order;
 			MeleeShow.SortingIndex = MeleeHide.SortingIndex = 0;
-			MeleeHide.ShowInMenu = false;
+			MeleeHide.Available = false;
 			MyMutators.NumAndHide(m => m.Id.StartsWith("aToM:Melee"), order);
 			#endregion
 
 			#region Thrown Damage/Count/Distance
-			ThrownShow = RogueLibs.SetMutator("aToM:ThrownShow", true,
+			ThrownShow = RogueLibs.CreateCustomMutator("aToM:ThrownShow", true,
 				new CustomNameInfo("[aToM] THROWN MUTATORS (show)", null, null, null, null, "[aToM] МУТАТОРЫ КИДАТЕЛЬНОГО ОРУЖИЯ (показать)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ThrownHide = RogueLibs.SetMutator("aToM:ThrownHide", true,
+			ThrownHide = RogueLibs.CreateCustomMutator("aToM:ThrownHide", true,
 				new CustomNameInfo("[aToM] THROWN MUTATORS (hide)", null, null, null, null, "[aToM] МУТАТОРЫ КИДАТЕЛЬНОГО ОРУЖИЯ (скрыть)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ThrownShow.OnEnabled += () => ToggleThrown(true);
-			ThrownHide.OnEnabled += () => ToggleThrown(false);
+			ThrownShow.OnToggledInMutatorMenu += (m, b, state) => ToggleThrown(true);
+			ThrownHide.OnToggledInMutatorMenu += (m, b, state) => ToggleThrown(false);
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage0", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage0", true,
 				new CustomNameInfo("[aToM] Thrown Damage x0", null, null, null, null, "[aToM] Урон кидательного оружия x0", null, null),
 				new CustomNameInfo("All thrown weapons deal zero damage", null, null, null, null, "Всё кидательное оружие наносит ноль урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage025", true,
 				new CustomNameInfo("[aToM] Thrown Damage x0.25", null, null, null, null, "[aToM] Урон кидательного оружия x0.25", null, null),
 				new CustomNameInfo("All thrown weapons deal 4x less damage", null, null, null, null, "Всё кидательное оружие наносит в 4x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage05", true,
 				new CustomNameInfo("[aToM] Thrown Damage x0.5", null, null, null, null, "[aToM] Урон кидательного оружия x0.5", null, null),
 				new CustomNameInfo("All thrown weapons deal 2x less damage", null, null, null, null, "Всё кидательное оружие наносит в 2x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage2", true,
 				new CustomNameInfo("[aToM] Thrown Damage x2", null, null, null, null, "[aToM] Урон кидательного оружия x2", null, null),
 				new CustomNameInfo("All thrown weapons deal 2x more damage", null, null, null, null, "Всё кидательное оружие наносит в 2x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage4", true,
 				new CustomNameInfo("[aToM] Thrown Damage x4", null, null, null, null, "[aToM] Урон кидательного оружия x4", null, null),
 				new CustomNameInfo("All thrown weapons deal 4x more damage", null, null, null, null, "Всё кидательное оружие наносит в 4x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage8", true,
 				new CustomNameInfo("[aToM] Thrown Damage x8", null, null, null, null, "[aToM] Урон кидательного оружия x8", null, null),
 				new CustomNameInfo("All thrown weapons deal 8x more damage", null, null, null, null, "Всё кидательное оружие наносит в 8x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDamage999", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDamage999", true,
 				new CustomNameInfo("[aToM] Thrown Damage x999", null, null, null, null, "[aToM] Урон кидательного оружия x999", null, null),
 				new CustomNameInfo("All thrown weapons deal 999x more damage", null, null, null, null, "Всё кидательное оружие наносит в 999x больше урона", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:ThrownDamage"));
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownCount025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownCount025", true,
 				new CustomNameInfo("[aToM] Thrown Count x0.25", null, null, null, null, "[aToM] Количество кидательного оружия x0.25", null, null),
 				new CustomNameInfo("All thrown weapons appear in 4x smaller stacks", null, null, null, null, "Количество кидательного оружия в стаках в 4x меньше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownCount05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownCount05", true,
 				new CustomNameInfo("[aToM] Thrown Count x0.5", null, null, null, null, "[aToM] Количество кидательного оружия x0.5", null, null),
 				new CustomNameInfo("All thrown weapons appear in 2x smaller stacks", null, null, null, null, "Количество кидательного оружия в стаках в 2x меньше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownCount2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownCount2", true,
 				new CustomNameInfo("[aToM] Thrown Count x2", null, null, null, null, "[aToM] Количество кидательного оружия x2", null, null),
 				new CustomNameInfo("All thrown weapons appear in 2x larger stacks", null, null, null, null, "Количество кидательного оружия в стаках в 2x больше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownCount4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownCount4", true,
 				new CustomNameInfo("[aToM] Thrown Count x4", null, null, null, null, "[aToM] Количество кидательного оружия x4", null, null),
 				new CustomNameInfo("All thrown weapons appear in 4x larger stacks", null, null, null, null, "Количество кидательного оружия в стаках в 4x больше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownCount8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownCount8", true,
 				new CustomNameInfo("[aToM] Thrown Count x8", null, null, null, null, "[aToM] Количество кидательного оружия x8", null, null),
 				new CustomNameInfo("All thrown weapons appear in 8x larger stacks", null, null, null, null, "Количество кидательного оружия в стаках в 8x больше", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:ThrownCount"));
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDistance025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDistance025", true,
 				new CustomNameInfo("[aToM] Thrown Distance x0.25", null, null, null, null, "[aToM] Дальность кидательного оружия x0.25", null, null),
 				new CustomNameInfo("All thrown weapons can be thrown at 4x smaller distance", null, null, null, null, "Всё кидательное оружие можно кидать на в 4x меньшее расстояние", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDistance05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDistance05", true,
 				new CustomNameInfo("[aToM] Thrown Distance x0.5", null, null, null, null, "[aToM] Дальность кидательного оружия x0.5", null, null),
 				new CustomNameInfo("All thrown weapons can be thrown at 2x smaller distance", null, null, null, null, "Всё кидательное оружие можно кидать на в 2x меньшее расстояние", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDistance2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDistance2", true,
 				new CustomNameInfo("[aToM] Thrown Distance x2", null, null, null, null, "[aToM] Дальность кидательного оружия x2", null, null),
 				new CustomNameInfo("All thrown weapons can be thrown at 2x greater distance", null, null, null, null, "Всё кидательное оружие можно кидать на в 2x большее расстояние", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ThrownDistance4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ThrownDistance4", true,
 				new CustomNameInfo("[aToM] Thrown Distance x4", null, null, null, null, "[aToM] Дальность кидательного оружия x4", null, null),
 				new CustomNameInfo("All thrown weapons can be thrown at 4x greater distance", null, null, null, null, "Всё кидательное оружие можно кидать на в 4x большее расстояние", null, null)));
 
@@ -211,132 +227,132 @@ namespace aTonOfMutators
 			order = UniqueInt + 2;
 			ThrownShow.SortingOrder = ThrownHide.SortingOrder = order;
 			ThrownShow.SortingIndex = ThrownHide.SortingIndex = 0;
-			ThrownHide.ShowInMenu = false;
+			ThrownHide.Available = false;
 			MyMutators.NumAndHide(m => m.Id.StartsWith("aToM:Thrown"), order);
 			#endregion
 
 			#region Ranged Damage/Ammo/Firerate/Fully Automatic
-			RangedShow = RogueLibs.SetMutator("aToM:RangedShow", true,
+			RangedShow = RogueLibs.CreateCustomMutator("aToM:RangedShow", true,
 				new CustomNameInfo("[aToM] RANGED MUTATORS (show)", null, null, null, null, "[aToM] МУТАТОРЫ ДАЛЬНЕГО БОЯ (показать)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			RangedHide = RogueLibs.SetMutator("aToM:RangedHide", true,
+			RangedHide = RogueLibs.CreateCustomMutator("aToM:RangedHide", true,
 				new CustomNameInfo("[aToM] RANGED MUTATORS (hide)", null, null, null, null, "[aToM] МУТАТОРЫ ДАЛЬНЕГО БОЯ (скрыть)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			RangedShow.OnEnabled += () => ToggleRanged(true);
-			RangedHide.OnEnabled += () => ToggleRanged(false);
+			RangedShow.OnToggledInMutatorMenu += (m, b, state) => ToggleRanged(true);
+			RangedHide.OnToggledInMutatorMenu += (m, b, state) => ToggleRanged(false);
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage0", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage0", true,
 				new CustomNameInfo("[aToM] Ranged Damage x0", null, null, null, null, "[aToM] Урон оружия дальнего боя x0", null, null),
 				new CustomNameInfo("All ranged weapons deal zero damage", null, null, null, null, "Всё оружие дальнего боя наносит ноль урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage025", true,
 				new CustomNameInfo("[aToM] Ranged Damage x0.25", null, null, null, null, "[aToM] Урон оружия дальнего боя x0.25", null, null),
 				new CustomNameInfo("All ranged weapons deal 4x less damage", null, null, null, null, "Всё оружие дальнего боя наносит в 4x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage05", true,
 				new CustomNameInfo("[aToM] Ranged Damage x0.5", null, null, null, null, "[aToM] Урон оружия дальнего боя x0.5", null, null),
 				new CustomNameInfo("All ranged weapons deal 2x less damage", null, null, null, null, "Всё оружие дальнего боя наносит в 2x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage2", true,
 				new CustomNameInfo("[aToM] Ranged Damage x2", null, null, null, null, "[aToM] Урон оружия дальнего боя x2", null, null),
 				new CustomNameInfo("All ranged weapons deal 2x more damage", null, null, null, null, "Всё оружие дальнего боя наносит в 2x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage4", true,
 				new CustomNameInfo("[aToM] Ranged Damage x4", null, null, null, null, "[aToM] Урон оружия дальнего боя x4", null, null),
 				new CustomNameInfo("All ranged weapons deal 4x more damage", null, null, null, null, "Всё оружие дальнего боя наносит в 4x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage8", true,
 				new CustomNameInfo("[aToM] Ranged Damage x8", null, null, null, null, "[aToM] Урон оружия дальнего боя x8", null, null),
 				new CustomNameInfo("All ranged weapons deal 8x more damage", null, null, null, null, "Всё оружие дальнего боя наносит в 8x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedDamage999", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedDamage999", true,
 				new CustomNameInfo("[aToM] Ranged Damage x999", null, null, null, null, "[aToM] Урон оружия дальнего боя x999", null, null),
 				new CustomNameInfo("All ranged weapons deal 999x more damage", null, null, null, null, "Всё оружие дальнего боя наносит в 999x больше урона", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:RangedDamage"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:RangedDamage"), "NoGuns");
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo1", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo1", true,
 				new CustomNameInfo("[aToM] Ranged Ammo 1", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя 1", null, null),
 				new CustomNameInfo("All ranged weapons appear with 1 ammo", null, null, null, null, "Всё оружие дальнего боя появляется с 1 запасом аммуниции", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo025", true,
 				new CustomNameInfo("[aToM] Ranged Ammo x0.25", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя x0.25", null, null),
 				new CustomNameInfo("All ranged weapons appear with 4x less ammo", null, null, null, null, "Всё оружие дальнего боя появляется с в 4x меньшим запасом аммуниции", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo05", true,
 				new CustomNameInfo("[aToM] Ranged Ammo x0.5", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя x0.5", null, null),
 				new CustomNameInfo("All ranged weapons appear with 2x less ammo", null, null, null, null, "Всё оружие дальнего боя появляется с в 2x меньшим запасом аммуниции", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo2", true,
 				new CustomNameInfo("[aToM] Ranged Ammo x2", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя x2", null, null),
 				new CustomNameInfo("All ranged weapons appear with 2x more ammo", null, null, null, null, "Всё оружие дальнего боя появляется с в 2x большим запасом аммуниции", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo4", true,
 				new CustomNameInfo("[aToM] Ranged Ammo x4", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя x4", null, null),
 				new CustomNameInfo("All ranged weapons appear with 4x more ammo", null, null, null, null, "Всё оружие дальнего боя появляется с в 4x большим запасом аммуниции", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedAmmo8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedAmmo8", true,
 				new CustomNameInfo("[aToM] Ranged Ammo x8", null, null, null, null, "[aToM] Запас аммуниции оружия дальнего боя x8", null, null),
 				new CustomNameInfo("All ranged weapons appear with 8x more ammo", null, null, null, null, "Всё оружие дальнего боя появляется с в 8x большим запасом аммуниции", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:RangedAmmo"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:RangedAmmo"), "NoGuns", "InfiniteAmmo");
 			
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFirerate025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFirerate025", true,
 				new CustomNameInfo("[aToM] Ranged Firerate x0.25", null, null, null, null, "[aToM] Скорострельность оружия дальнего боя x0.25", null, null),
 				new CustomNameInfo("All ranged weapons have 4x slower rate of fire", null, null, null, null, "Всё оружие дальнего боя стреляет в 4x медленнее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFirerate05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFirerate05", true,
 				new CustomNameInfo("[aToM] Ranged Firerate x0.5", null, null, null, null, "[aToM] Скорострельность оружия дальнего боя x0.5", null, null),
 				new CustomNameInfo("All ranged weapons have 2x slower rate of fire", null, null, null, null, "Всё оружие дальнего боя стреляет в 2x медленнее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFirerate2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFirerate2", true,
 				new CustomNameInfo("[aToM] Ranged Firerate x2", null, null, null, null, "[aToM] Скорострельность оружия дальнего боя x2", null, null),
 				new CustomNameInfo("All ranged weapons have 2x faster rate of fire", null, null, null, null, "Всё оружие дальнего боя стреляет в 2x быстрее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFirerate4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFirerate4", true,
 				new CustomNameInfo("[aToM] Ranged Firerate x4", null, null, null, null, "[aToM] Скорострельность оружия дальнего боя x4", null, null),
 				new CustomNameInfo("All ranged weapons have 4x faster rate of fire", null, null, null, null, "Всё оружие дальнего боя стреляет в 4x быстрее", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFirerate8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFirerate8", true,
 				new CustomNameInfo("[aToM] Ranged Firerate x8", null, null, null, null, "[aToM] Скорострельность оружия дальнего боя x8", null, null),
 				new CustomNameInfo("All ranged weapons have 8x faster rate of fire", null, null, null, null, "Всё оружие дальнего боя стреляет в 8x быстрее", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:RangedFirerate"));
 			MyMutators.EachConflict(m => m.Id.StartsWith("aToM:RangeFirerate"), "NoGuns");
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:RangedFullAuto", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:RangedFullAuto", true,
 				new CustomNameInfo("[aToM] Fully Automatic Ranged Weapons", null, null, null, null, "[aToM] Самострельное оружие дальнего боя", null, null),
 				new CustomNameInfo("All ranged weapons are fully automatic", null, null, null, null, "Всё оружие дальнего боя может вести непрерывный огонь", null, null)));
 
 			order = UniqueInt + 3;
 			RangedShow.SortingOrder = RangedHide.SortingOrder = order;
 			RangedShow.SortingIndex = RangedHide.SortingIndex = 0;
-			RangedHide.ShowInMenu = false;
+			RangedHide.Available = false;
 			MyMutators.NumAndHide(m => m.Id.StartsWith("aToM:Ranged"), order);
 			#endregion
 
 			#region Projectile Speed/Random Projectiles
-			ProjectileShow = RogueLibs.SetMutator("aToM:ProjectileShow", true,
+			ProjectileShow = RogueLibs.CreateCustomMutator("aToM:ProjectileShow", true,
 				new CustomNameInfo("[aToM] PROJECTILE MUTATORS (show)", null, null, null, null, "[aToM] МУТАТОРЫ СНАРЯДОВ (показать)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ProjectileHide = RogueLibs.SetMutator("aToM:ProjectileHide", true,
+			ProjectileHide = RogueLibs.CreateCustomMutator("aToM:ProjectileHide", true,
 				new CustomNameInfo("[aToM] PROJECTILE MUTATORS (hide)", null, null, null, null, "[aToM] МУТАТОРЫ СНАРЯДОВ (скрыть)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ProjectileShow.OnEnabled += () => ToggleProjectile(true);
-			ProjectileHide.OnEnabled += () => ToggleProjectile(false);
+			ProjectileShow.OnToggledInMutatorMenu += (m, b, state) => ToggleProjectile(true);
+			ProjectileHide.OnToggledInMutatorMenu += (m, b, state) => ToggleProjectile(false);
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileSpeed0", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileSpeed0", true,
 				new CustomNameInfo("[aToM] Projectile Speed x0", null, null, null, null, "[aToM] Скорость снарядов x0", null, null),
 				new CustomNameInfo("All projectiles travel at zero speed", null, null, null, null, "Все снаряды летят с нулевой скоростью", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileSpeed025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileSpeed025", true,
 				new CustomNameInfo("[aToM] Projectile Speed x0.25", null, null, null, null, "[aToM] Скорость снарядов x0.25", null, null),
 				new CustomNameInfo("All projectiles travel at 4x lower speed", null, null, null, null, "Все снаряды летят с в 4x меньшей скоростью", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileSpeed05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileSpeed05", true,
 				new CustomNameInfo("[aToM] Projectile Speed x0.5", null, null, null, null, "[aToM] Скорость снарядов x0.5", null, null),
 				new CustomNameInfo("All projectiles travel at 2x lower speed", null, null, null, null, "Все снаряды летят с в 2x меньшей скоростью", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileSpeed2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileSpeed2", true,
 				new CustomNameInfo("[aToM] Projectile Speed x2", null, null, null, null, "[aToM] Скорость снарядов x2", null, null),
 				new CustomNameInfo("All projectiles travel at 2x greater speed", null, null, null, null, "Все снаряды летят с в 2x большей скоростью", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileSpeed4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileSpeed4", true,
 				new CustomNameInfo("[aToM] Projectile Speed x4", null, null, null, null, "[aToM] Скорость снарядов x4", null, null),
 				new CustomNameInfo("All projectiles travel at 4x greater speed", null, null, null, null, "Все снаряды летят с в 4x большей скоростью", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:ProjectileSpeed"));
 			
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileTypeRocket", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileTypeRocket", true,
 				new CustomNameInfo("[aToM] Rocket Projectiles", null, null, null, null, "[aToM] Снаряды-ракеты", null, null),
 				new CustomNameInfo("All projectiles are rockets", null, null, null, null, "Все снаряды - ракеты", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileTypeRandom", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileTypeRandom", true,
 				new CustomNameInfo("[aToM] Random Projectiles", null, null, null, null, "[aToM] Рандомные снаряды", null, null),
 				new CustomNameInfo("All projectiles are random", null, null, null, null, "Все снаряды рандомны", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ProjectileTypeRandomEffect", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ProjectileTypeRandomEffect", true,
 				new CustomNameInfo("[aToM] Random Effect Projectiles", null, null, null, null, "[aToM] Снаряды с рандомными эффектами", null, null),
 				new CustomNameInfo("All projectiles are water pistol bullets with random effects", null, null, null, null, "Все снаряды - пули водяного пистолета с рандомными эффектами", null, null)));
 
@@ -345,51 +361,51 @@ namespace aTonOfMutators
 			order = UniqueInt + 4;
 			ProjectileShow.SortingOrder = ProjectileHide.SortingOrder = order;
 			ProjectileShow.SortingIndex = ProjectileHide.SortingIndex = 0;
-			ProjectileHide.ShowInMenu = false;
+			ProjectileHide.Available = false;
 			MyMutators.NumAndHide(m => m.Id.StartsWith("aToM:Projectile"), order);
 			#endregion
 			
 			#region Explosion Damage/Power
-			ExplosionShow = RogueLibs.SetMutator("aToM:ExplosionShow", true,
+			ExplosionShow = RogueLibs.CreateCustomMutator("aToM:ExplosionShow", true,
 				new CustomNameInfo("[aToM] EXPLOSION MUTATORS (show)", null, null, null, null, "[aToM] МУТАТОРЫ ВЗРЫВОВ (показать)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ExplosionHide = RogueLibs.SetMutator("aToM:ExplosionHide", true,
+			ExplosionHide = RogueLibs.CreateCustomMutator("aToM:ExplosionHide", true,
 				new CustomNameInfo("[aToM] EXPLOSION MUTATORS (hide)", null, null, null, null, "[aToM] МУТАТОРЫ ВЗРЫВОВ (скрыть)", null, null),
 				new CustomNameInfo("...", null, null, null, null, "...", null, null));
-			ExplosionShow.OnEnabled += () => ToggleExplosion(true);
-			ExplosionHide.OnEnabled += () => ToggleExplosion(false);
+			ExplosionShow.OnToggledInMutatorMenu += (m, b, state) => ToggleExplosion(true);
+			ExplosionHide.OnToggledInMutatorMenu += (m, b, state) => ToggleExplosion(false);
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionDamage025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionDamage025", true,
 				new CustomNameInfo("[aToM] Explosion Damage x0.25", null, null, null, null, "[aToM] Урон от взрывов x0.25", null, null),
 				new CustomNameInfo("All explosions deal 4x less damage", null, null, null, null, "Все взрывы наносят в 4x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionDamage05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionDamage05", true,
 				new CustomNameInfo("[aToM] Explosion Damage x0.5", null, null, null, null, "[aToM] Урон от взрывов x0.5", null, null),
 				new CustomNameInfo("All explosions deal 2x less damage", null, null, null, null, "Все взрывы наносят в 2x меньше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionDamage2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionDamage2", true,
 				new CustomNameInfo("[aToM] Explosion Damage x2", null, null, null, null, "[aToM] Урон от взрывов x2", null, null),
 				new CustomNameInfo("All explosions deal 2x more damage", null, null, null, null, "Все взрывы наносят в 2x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionDamage4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionDamage4", true,
 				new CustomNameInfo("[aToM] Explosion Damage x4", null, null, null, null, "[aToM] Урон от взрывов x4", null, null),
 				new CustomNameInfo("All explosions deal 4x more damage", null, null, null, null, "Все взрывы наносят в 4x больше урона", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionDamage8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionDamage8", true,
 				new CustomNameInfo("[aToM] Explosion Damage x8", null, null, null, null, "[aToM] Урон от взрывов x8", null, null),
 				new CustomNameInfo("All explosions deal 8x more damage", null, null, null, null, "Все взрывы наносят в 8x больше урона", null, null)));
 
 			MyMutators.CrossConflict(m => m.Id.StartsWith("aToM:ExplosionDamage"));
 
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionPower025", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionPower025", true,
 				new CustomNameInfo("[aToM] Explosion Power x0.25", null, null, null, null, "[aToM] Мощность взрывов x0.25", null, null),
 				new CustomNameInfo("All explosions are 4x smaller", null, null, null, null, "Все взрывы в 4x меньше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionPower05", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionPower05", true,
 				new CustomNameInfo("[aToM] Explosion Power x0.5", null, null, null, null, "[aToM] Мощность взрывов x0.5", null, null),
 				new CustomNameInfo("All explosions are 2x smaller", null, null, null, null, "Все взрывы в 2x меньше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionPower2", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionPower2", true,
 				new CustomNameInfo("[aToM] Explosion Power x2", null, null, null, null, "[aToM] Мощность взрывов x2", null, null),
 				new CustomNameInfo("All explosions are 2x bigger", null, null, null, null, "Все взрывы в 2x больше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionPower4", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionPower4", true,
 				new CustomNameInfo("[aToM] Explosion Power x4", null, null, null, null, "[aToM] Мощность взрывов x4", null, null),
 				new CustomNameInfo("All explosions are 4x bigger", null, null, null, null, "Все взрывы в 4x больше", null, null)));
-			MyMutators.Add(RogueLibs.SetMutator("aToM:ExplosionPower8", true,
+			MyMutators.Add(RogueLibs.CreateCustomMutator("aToM:ExplosionPower8", true,
 				new CustomNameInfo("[aToM] Explosion Power x8", null, null, null, null, "[aToM] Мощность взрывов x8", null, null),
 				new CustomNameInfo("All explosions are 8x bigger", null, null, null, null, "Все взрывы в 8x больше", null, null)));
 
@@ -398,7 +414,7 @@ namespace aTonOfMutators
 			order = UniqueInt + 5;
 			ExplosionShow.SortingOrder = ExplosionHide.SortingOrder = order;
 			ExplosionShow.SortingIndex = ExplosionHide.SortingIndex = 0;
-			ExplosionHide.ShowInMenu = false;
+			ExplosionHide.Available = false;
 			MyMutators.NumAndHide(m => m.Id.StartsWith("aToM:Explosion"), order);
 			#endregion
 
@@ -561,56 +577,56 @@ namespace aTonOfMutators
 
 		public void ToggleMelee(bool state)
 		{
-			MeleeShow.ShowInMenu = !state;
+			MeleeShow.Available = !state;
 			MeleeShow.IsActive = false;
-			MeleeHide.ShowInMenu = state;
+			MeleeHide.Available = state;
 			MeleeHide.IsActive = false;
 
-			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Melee"), m => m.ShowInMenu = state);
+			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Melee"), m => m.Available = state);
 
 			GameController.gameController.mainGUI.scrollingMenuScript.OpenScrollingMenu();
 		}
 		public void ToggleThrown(bool state)
 		{
-			ThrownShow.ShowInMenu = !state;
+			ThrownShow.Available = !state;
 			ThrownShow.IsActive = false;
-			ThrownHide.ShowInMenu = state;
+			ThrownHide.Available = state;
 			ThrownHide.IsActive = false;
 
-			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Thrown"), m => m.ShowInMenu = state);
+			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Thrown"), m => m.Available = state);
 
 			GameController.gameController.mainGUI.scrollingMenuScript.OpenScrollingMenu();
 		}
 		public void ToggleRanged(bool state)
 		{
-			RangedShow.ShowInMenu = !state;
+			RangedShow.Available = !state;
 			RangedShow.IsActive = false;
-			RangedHide.ShowInMenu = state;
+			RangedHide.Available = state;
 			RangedHide.IsActive = false;
 
-			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Ranged"), m => m.ShowInMenu = state);
+			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Ranged"), m => m.Available = state);
 
 			GameController.gameController.mainGUI.scrollingMenuScript.OpenScrollingMenu();
 		}
 		public void ToggleProjectile(bool state)
 		{
-			ProjectileShow.ShowInMenu = !state;
+			ProjectileShow.Available = !state;
 			ProjectileShow.IsActive = false;
-			ProjectileHide.ShowInMenu = state;
+			ProjectileHide.Available = state;
 			ProjectileHide.IsActive = false;
 
-			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Projectile"), m => m.ShowInMenu = state);
+			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Projectile"), m => m.Available = state);
 
 			GameController.gameController.mainGUI.scrollingMenuScript.OpenScrollingMenu();
 		}
 		public void ToggleExplosion(bool state)
 		{
-			ExplosionShow.ShowInMenu = !state;
+			ExplosionShow.Available = !state;
 			ExplosionShow.IsActive = false;
-			ExplosionHide.ShowInMenu = state;
+			ExplosionHide.Available = state;
 			ExplosionHide.IsActive = false;
 
-			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Explosion"), m => m.ShowInMenu = state);
+			MyMutators.ForEach(m => m.Id.StartsWith("aToM:Explosion"), m => m.Available = state);
 
 			GameController.gameController.mainGUI.scrollingMenuScript.OpenScrollingMenu();
 		}
@@ -640,7 +656,7 @@ namespace aTonOfMutators
 			foreach (CustomMutator mutator in this)
 				if (predicate(mutator))
 					selected.Add(mutator);
-			RogueUtilities.CrossConflict(selected.ToArray());
+			ATOM.MyRogueUtilities.CrossConflict(selected.ToArray());
 		}
 		public void EachConflict(Predicate<CustomMutator> predicate, params string[] conflicts)
 		{
@@ -648,7 +664,7 @@ namespace aTonOfMutators
 			foreach (CustomMutator mutator in this)
 				if (predicate(mutator))
 					selected.Add(mutator);
-			RogueUtilities.EachConflict(conflicts, selected.ToArray());
+			ATOM.MyRogueUtilities.EachConflict(conflicts, selected.ToArray());
 		}
 		public void NumAndHide(Predicate<CustomMutator> predicate, int order)
 		{
@@ -658,7 +674,7 @@ namespace aTonOfMutators
 				{
 					mutator.SortingOrder = order;
 					mutator.SortingIndex = index++;
-					mutator.ShowInMenu = false;
+					mutator.Available = false;
 				}
 		}
 	}
