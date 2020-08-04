@@ -25,7 +25,7 @@ This mod adds a lot (76) mutators to the game. They are separated into 5 dropdow
 <br/><br/>
 
 Planned and Work-In-Progress Mutators:
-* Explode with bullets on death (like shotgunkins in Enter the Gungeon);
+* Explode with bullets on death (like shotgun kins in Enter the Gungeon);
 
 ## Links ##
 *  [Download a Ton of Mutators](https://github.com/Abbysssal/aToM/releases)
