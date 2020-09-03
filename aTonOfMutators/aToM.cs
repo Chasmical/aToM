@@ -677,5 +677,6 @@ namespace aTonOfMutators
 					mutator.Available = false;
 				}
 		}
+
 	}
 }
