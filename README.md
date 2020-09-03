@@ -5,7 +5,7 @@
 3. [How does it all work?](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
 4. [Changelog](https://github.com/Abbysssal/aToM/blob/master/Changelog.md)
 
-# a Ton of Mutators (aToM) v1.1 #
+# a Ton of Mutators (aToM) v1.2 #
 This mod adds a lot (76) mutators to the game. They are separated into 5 dropdown categories "Melee", "Thrown", "Ranged", "Projectile" and "Explosion" so they don't take a lot of space in the menu:
 * [Melee Damage x0/x0.25/x0.5/x2/x4/x8/x999](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-damage-);
 * [Melee Durability 1/x0.25/x0.5/x2/x4/x8](https://github.com/Abbysssal/aToM/blob/master/Mutators.md#melee-durability-);
@@ -25,7 +25,7 @@ This mod adds a lot (76) mutators to the game. They are separated into 5 dropdow
 <br/><br/>
 
 Planned and Work-In-Progress Mutators:
-* Explode with bullets on death (like blue shotgunkins in Enter the Gungeon);
+* Explode with bullets on death (like shotgun kins in Enter the Gungeon);
 
 ## Links ##
 *  [Download a Ton of Mutators](https://github.com/Abbysssal/aToM/releases)
