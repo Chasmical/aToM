@@ -1,9 +1,23 @@
-## [Contents](https://github.com/Abbysssal/aToM) ##
-
-1.  **Main page**
-2.  [Mutators](https://github.com/Abbysssal/aToM/blob/master/Mutators.md)
-3.  [How does it all work?](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
-4.  [Changelog](https://github.com/Abbysssal/aToM/blob/master/Changelog.md)
+<div align="center">
+  <p>
+    <a href="https://github.com/Abbysssal/aToM/releases/latest">
+      <img src="https://img.shields.io/github/v/release/Abbysssal/aToM?label=Latest%20release&style=for-the-badge&logo=github" alt="Latest release"/>
+    </a>
+    <a href="https://github.com/Abbysssal/aToM/releases">
+      <img src="https://img.shields.io/github/v/release/Abbysssal/aToM?include_prereleases&label=Latest%20pre-release&style=for-the-badge&logo=github" alt="Latest pre-release"/>
+    </a>
+    <br/>
+    <a href="https://github.com/Abbysssal/aToM/releases">
+      <img src="https://img.shields.io/github/downloads/Abbysssal/aToM/total?label=Downloads&style=for-the-badge" alt="Downloads"/>
+    </a>
+    <a href="https://github.com/Abbysssal/aToM/subscription">
+      <img src="https://img.shields.io/github/watchers/Abbysssal/aToM?color=green&label=Watchers&style=for-the-badge" alt="Watchers"/>
+    </a>
+    <a href="https://github.com/Abbysssal/aToM/stargazers">
+      <img src="https://img.shields.io/github/stars/Abbysssal/aToM?color=green&label=Stars&style=for-the-badge" alt="Stars"/>
+    </a>
+  </p>
+</div>
 
 # a Ton of Mutators (aToM) v1.2 #
 This mod adds a lot (76) mutators to the game. They are separated into 5 dropdown categories "Melee", "Thrown", "Ranged", "Projectile" and "Explosion" so they don't take a lot of space in the menu:
@@ -29,21 +43,15 @@ This mod adds a lot (76) mutators to the game. They are separated into 5 dropdow
 
 ## Installation ##
 1.  Install BepInEx:
-    1.  [Download the latest version of BepInEx](https://github.com/BepInEx/BepInEx/releases);
+    1.  [Download the latest version of BepInEx](https://github.com/BepInEx/BepInEx/releases/latest);
     2.  Drag all files from the archive into directory /Steam/SteamApps/common/Streets of Rogue/;
     3.  Run the game, so BepInEx can create needed files and directories, and close the game;
 2.  Install RogueLibs:
-    1.  [Download the latest version of RogueLibs](https://github.com/Abbysssal/RogueLibs/releases);
+    1.  [Download the latest version of RogueLibs](https://github.com/Abbysssal/RogueLibs/releases/latest);
     2.  Drag the file "RogueLibs.dll" into directory /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins;
-3.  [Download the latest version of a Ton of Mutators](https://github.com/Abbysssal/aToM/releases);
+3.  [Download the latest version of a Ton of Mutators](https://github.com/Abbysssal/aToM/releases/latest);
 4.  Drag the file "aTonOfMutators.dll" into directory /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins;
 5.  Done! Now run the game and enjoy!
 
 ## Deinstallation ##
 1.  Just remove "aTonOfMutators.dll" from /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins.
-
-## Mutators list ##
-[see here](https://github.com/Abbysssal/aToM/blob/master/Mutators.md)
-
-## How do these mutators work? ##
-[see here](https://github.com/Abbysssal/aToM/blob/master/HowItAllWorks.md)
