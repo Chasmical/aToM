@@ -35,13 +35,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="md\.discord.md" />
-    <None Include="md\Changelog.md" />
-    <None Include="md\HowItAllWorks.md" />
-    <None Include="md\Mutators.md" />
-    <None Include="md\README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
@@ -54,6 +47,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\RogueLibs.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\UnityEngine.dll</HintPath>
