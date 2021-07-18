@@ -59,5 +59,5 @@ This mod adds a lot (92) mutators to the game. They are separated into 5 dropdow
 4.  Drag the file "aTonOfMutators.dll" into directory /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins;
 5.  Done! Now run the game and enjoy!
 
-## Deinstallation ##
+## Uninstallation ##
 1.  Just remove "aTonOfMutators.dll" from /Steam/SteamApps/common/Streets of Rogue/BepInEx/plugins.
