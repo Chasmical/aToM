@@ -13,13 +13,13 @@ using Light2D;
 
 namespace aTonOfMutators
 {
-	[BepInPlugin(GUID, Name, Version)]
-	[BepInDependency(RogueLibs.GUID, "3.3.0")]
-	public class AToMPlugin : BaseUnityPlugin
-	{
-		public const string GUID = "abbysssal.streetsofrogue.atonofmutators";
-		public const string Name = "a Ton of Mutators";
-		public const string Version = "2.0.0";
+    [BepInPlugin(GUID, Name, Version)]
+    [BepInDependency(RogueLibs.GUID, "3.3.0")]
+    public class AToMPlugin : BaseUnityPlugin
+    {
+        public const string GUID = "abbysssal.streetsofrogue.atonofmutators";
+        public const string Name = "a Ton of Mutators";
+        public const string Version = "2.0.0";
 
         private static readonly Regex regex = new Regex(@"\[(.*?)\|(.*?)\|(.*?)\|(.*?)\]");
         private static string FormatName(string text, float multiplier)
@@ -63,16 +63,16 @@ namespace aTonOfMutators
         {
             switch (multiplier)
             {
-				case 0f: return 8;
-				case float.Epsilon: return 8;
-				case 0.125f: return 6;
-				case 0.25f: return 4;
-				case 0.5f: return 2;
+                case 0f: return 8;
+                case float.Epsilon: return 8;
+                case 0.125f: return 6;
+                case 0.25f: return 4;
+                case 0.5f: return 2;
                 case 2f: return 2;
                 case 4f: return 4;
                 case 8f: return 6;
-				case 999f: return 8;
-				default: throw new ArgumentException("Invalid multiplier");
+                case 999f: return 8;
+                default: throw new ArgumentException("Invalid multiplier");
             }
         }
         private static float GetPrerequisiteMultiplier(float multiplier)
@@ -232,7 +232,7 @@ namespace aTonOfMutators
             return new AToMMutatorGroupBuilder(builders);
         }
         private static AToMMutatorGroupBuilder CreateMutatorGroup<T>(MultiplierType type, T[] values, int[] unlockCosts)
-		    where T : struct, Enum
+            where T : struct, Enum
         {
             UnlockBuilder[] builders = new UnlockBuilder[values.Length];
             for (int i = 0; i < builders.Length; i++)
@@ -358,10 +358,12 @@ namespace aTonOfMutators
                 .WithDescription(LanguageCode.English, "All explosions are [||.x larger|.x smaller].")
                 .InCategory(explosionCategory);
 
+            Logger.LogDebug($"There are currently {Categories.Sum(c => c.Mutators.Count)} mutators in aToM.");
+
             new AToMPatches().Patch(this);
 
         }
-	}
+    }
     public class AToMPatches
     {
         public void Patch(AToMPlugin caller)
@@ -379,71 +381,71 @@ namespace aTonOfMutators
 
         }
 
-		public static void InvItem_SetupDetails(InvItem __instance)
-		{
-			if (__instance.itemType == "WeaponMelee")
-			{
-				Multiplier(ref __instance.meleeDamage, GetMultiplier(MultiplierType.MeleeDamage));
+        public static void InvItem_SetupDetails(InvItem __instance)
+        {
+            if (__instance.itemType == "WeaponMelee")
+            {
+                Multiplier(ref __instance.meleeDamage, GetMultiplier(MultiplierType.MeleeDamage));
                 float durability = GetMultiplier(MultiplierType.MeleeDurability);
-				Multiplier(ref __instance.initCount, durability);
-				Multiplier(ref __instance.initCountAI, durability);
-				Multiplier(ref __instance.rewardCount, durability);
-			}
-			else if (__instance.itemType == "WeaponThrown")
-			{
-				Multiplier(ref __instance.throwDamage, GetMultiplier(MultiplierType.ThrownDamage));
+                Multiplier(ref __instance.initCount, durability);
+                Multiplier(ref __instance.initCountAI, durability);
+                Multiplier(ref __instance.rewardCount, durability);
+            }
+            else if (__instance.itemType == "WeaponThrown")
+            {
+                Multiplier(ref __instance.throwDamage, GetMultiplier(MultiplierType.ThrownDamage));
                 float count = GetMultiplier(MultiplierType.ThrownCount);
-				Multiplier(ref __instance.initCount, count);
-				Multiplier(ref __instance.initCountAI, count);
-				Multiplier(ref __instance.rewardCount, count);
+                Multiplier(ref __instance.initCount, count);
+                Multiplier(ref __instance.initCountAI, count);
+                Multiplier(ref __instance.rewardCount, count);
                 Multiplier(ref __instance.throwDistance, GetMultiplier(MultiplierType.ThrownDistance));
-			}
-			else if (__instance.itemType == "WeaponProjectile")
-			{
-				if (__instance.invItemName != "Taser")
+            }
+            else if (__instance.itemType == "WeaponProjectile")
+            {
+                if (__instance.invItemName != "Taser")
                 {
                     float ammo = GetMultiplier(MultiplierType.RangedAmmo);
-					Multiplier(ref __instance.initCount, ammo);
-					Multiplier(ref __instance.initCountAI, ammo);
-					Multiplier(ref __instance.rewardCount, ammo);
-					Multiplier(ref __instance.itemValue, 1f / ammo);
-				}
-				if (IsMutatorActive(MultiplierType.RangedFullAuto)) __instance.rapidFire = true;
-			}
-		}
-		public static void Movement_KnockForward(ref float strength) => Multiplier(ref strength, MultiplierType.MeleeLunge);
-		public static void Melee_Attack(Melee __instance)
+                    Multiplier(ref __instance.initCount, ammo);
+                    Multiplier(ref __instance.initCountAI, ammo);
+                    Multiplier(ref __instance.rewardCount, ammo);
+                    Multiplier(ref __instance.itemValue, 1f / ammo);
+                }
+                if (IsMutatorActive(MultiplierType.RangedFullAuto)) __instance.rapidFire = true;
+            }
+        }
+        public static void Movement_KnockForward(ref float strength) => Multiplier(ref strength, MultiplierType.MeleeLunge);
+        public static void Melee_Attack(Melee __instance)
         {
             float speed = GetMultiplier(MultiplierType.MeleeSpeed);
-			__instance.agent.weaponCooldown /= speed;
-			__instance.meleeContainerAnim.speed *= speed;
-		}
-		public static void Bullet_SetupBullet(Bullet __instance)
-		{
-			Multiplier(ref __instance.damage, MultiplierType.RangedDamage);
-			Multiplier(ref __instance.speed, MultiplierType.ProjectileSpeed);
-		}
-		public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
+            __instance.agent.weaponCooldown /= speed;
+            __instance.meleeContainerAnim.speed *= speed;
+        }
+        public static void Bullet_SetupBullet(Bullet __instance)
+        {
+            Multiplier(ref __instance.damage, MultiplierType.RangedDamage);
+            Multiplier(ref __instance.speed, MultiplierType.ProjectileSpeed);
+        }
+        public static void SpawnerMain_SpawnBullet(ref bulletStatus bulletType)
         {
             ProjectileType type = GetProjectileType();
-			if (type == ProjectileType.Rocket)
-				bulletType = bulletStatus.Rocket;
-			else if (type == ProjectileType.Random)
+            if (type == ProjectileType.Rocket)
+                bulletType = bulletStatus.Rocket;
+            else if (type == ProjectileType.Random)
             {
                 do bulletType = (bulletStatus)new System.Random().Next(1, 22); // [1;21]
                 while (bulletType == bulletStatus.ZombieSpit || bulletType == bulletStatus.Laser || bulletType == bulletStatus.MindControl);
             }
-		}
-		public static void Gun_SetWeaponCooldown(Gun __instance)
-		{
-			InverseMultiplier(ref __instance.agent.weaponCooldown, MultiplierType.RangedFireRate);
-			__instance.agent.weaponCooldown = Mathf.Max(__instance.agent.weaponCooldown, 0.05f);
-		}
-		public static void Explosion_SetupExplosion(Explosion __instance)
-		{
-			Multiplier(ref __instance.damage, MultiplierType.ExplosionDamage);
-			__instance.circleCollider2D.radius *= Mathf.Sqrt(GetMultiplier(MultiplierType.ExplosionPower));
-		}
+        }
+        public static void Gun_SetWeaponCooldown(Gun __instance)
+        {
+            InverseMultiplier(ref __instance.agent.weaponCooldown, MultiplierType.RangedFireRate);
+            __instance.agent.weaponCooldown = Mathf.Max(__instance.agent.weaponCooldown, 0.05f);
+        }
+        public static void Explosion_SetupExplosion(Explosion __instance)
+        {
+            Multiplier(ref __instance.damage, MultiplierType.ExplosionDamage);
+            __instance.circleCollider2D.radius *= Mathf.Sqrt(GetMultiplier(MultiplierType.ExplosionPower));
+        }
 
         private static readonly string[] RandomEffects =
         {
@@ -454,16 +456,16 @@ namespace aTonOfMutators
             "Frozen", "HearingBlocked", "Nicotine", "Tranquilized", "Electrocuted", "Giant",
             "IncreaseAllStats", "KillerThrower", "MindControlled", "NiceSmelling", "Cyanide",
         };
-		public static void Gun_spawnBullet(ref bulletStatus bulletType, ref string myStatusEffect)
-		{
+        public static void Gun_spawnBullet(ref bulletStatus bulletType, ref string myStatusEffect)
+        {
             ProjectileType type = GetProjectileType();
-			if (type == ProjectileType.RandomEffect || (bulletType == bulletStatus.WaterPistol && string.IsNullOrEmpty(myStatusEffect)))
-			{
-				bulletType = bulletStatus.WaterPistol;
-				int rand = new System.Random().Next(RandomEffects.Length);
-				myStatusEffect = RandomEffects[rand];
-			}
-		}
+            if (type == ProjectileType.RandomEffect || (bulletType == bulletStatus.WaterPistol && string.IsNullOrEmpty(myStatusEffect)))
+            {
+                bulletType = bulletStatus.WaterPistol;
+                int rand = new System.Random().Next(RandomEffects.Length);
+                myStatusEffect = RandomEffects[rand];
+            }
+        }
 
         public static void Multiplier(ref int value, MultiplierType type) => value = (int)Mathf.Ceil(value * GetMultiplier(type));
         public static void Multiplier(ref int value, float multiplier) => value = (int)Mathf.Ceil(value * multiplier);
@@ -507,7 +509,7 @@ namespace aTonOfMutators
             Mutators = new ReadOnlyCollection<AToMMutator>(_mutators);
         }
         private readonly List<AToMMutator> _mutators = new List<AToMMutator>();
-		public ReadOnlyCollection<AToMMutator> Mutators { get; }
+        public ReadOnlyCollection<AToMMutator> Mutators { get; }
 
         public void AddRange(IEnumerable<AToMMutator> mutators)
         {
@@ -602,9 +604,9 @@ namespace aTonOfMutators
             return "aToM:" + type + multiplier;
         }
 
-		public MultiplierType MultiplierType { get; }
-		public float MultiplierValue { get; }
-		public AToMCategory Category { get; internal set; }
+        public MultiplierType MultiplierType { get; }
+        public float MultiplierValue { get; }
+        public AToMCategory Category { get; internal set; }
 
         public override void OnPushedButton()
         {
