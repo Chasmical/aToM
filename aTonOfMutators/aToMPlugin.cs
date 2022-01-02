@@ -358,7 +358,7 @@ namespace aTonOfMutators
                 .WithDescription(LanguageCode.English, "All explosions are [||.x larger|.x smaller].")
                 .InCategory(explosionCategory);
 
-            Logger.LogDebug($"There are currently {Categories.Sum(c => c.Mutators.Count)} mutators in aToM.");
+            Logger.LogInfo($"There are currently {Categories.Sum(c => c.Mutators.Count)} mutators in aToM.");
 
             new AToMPatches().Patch(this);
 
