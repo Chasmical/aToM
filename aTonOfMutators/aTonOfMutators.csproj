@@ -38,39 +38,38 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\Libraries\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\.ref\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="BepInEx, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BepInEx, Version=5.4.15.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\BepInEx.dll</HintPath>
+      <HintPath>..\..\.ref\static\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="netstandard">
-      <HintPath>..\Libraries\netstandard.dll</HintPath>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\.ref\static\netstandard.dll</HintPath>
     </Reference>
-    <Reference Include="RogueLibsCore">
-      <HintPath>..\Libraries\RogueLibsCore.dll</HintPath>
+    <Reference Include="RogueLibsCore, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\.ref\RogueLibsCore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\UnityEngine.dll</HintPath>
+      <HintPath>..\..\.ref\static\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>..\..\.ref\static\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\.ref\static\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>..\..\.ref\static\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
