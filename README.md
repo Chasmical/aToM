@@ -19,6 +19,16 @@
   </p>
 </div>
 
+# Abandoned and archived
+
+### This mod will no longer be updated. Feel free to maintain it or take it apart for yourself.
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 # a Ton of Mutators (aToM) #
 This mod adds a lot (92) mutators to the game. They are separated into 5 dropdown categories "Melee", "Thrown", "Ranged", "Projectile" and "Explosion" so they don't take a lot of space in the menu:
 - [Melee Damage =1/x0.125/x0.25/x0.5/x2/x4/x8/x999](https://github.com/SugarBarrel/aToM/blob/master/Mutators.md#melee-damage);
